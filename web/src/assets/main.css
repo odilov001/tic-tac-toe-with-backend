@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input {
+  background: none;
+  border: 1px solid white;
+  border-radius: 10px;
+}
