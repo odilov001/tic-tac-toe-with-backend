@@ -5,6 +5,7 @@ export namespace IEntity {
 
   export namespace Game {
     export interface Main {
+      json(): unknown;
       id: string;
       player1: string;
       player2: string;

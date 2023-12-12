@@ -6,3 +6,5 @@ export const http = {
   post: (suffixURL: string, body: BodyInit) => fetch(baseURL + suffixURL, { method: "POST", headers: { "content-type": "application/json" }, body }),
   patch: (suffixURL: string, body: BodyInit) => fetch(baseURL + suffixURL, { method: "PATCH", headers: { "content-type": "application/json" }, body })
 };
+
+
