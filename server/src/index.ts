@@ -42,7 +42,7 @@ app.post("/api/tic-tac-toe", (req, res) => {
 
   games.push(game);
 
-  res.send({ data: game, message: "Game successfully created 💐" });
+  res.send(game);
 });
 
 app.post("/api/tic-tac-toe/move/:gameId", (req, res) => {

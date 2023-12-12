@@ -1,4 +1,6 @@
+import { Create, Single } from "./services/tic-tac-toe";
 import "./assets/bundle.css";
+import { IForm } from "types";
 
 /*                     DOM VARIABLES                       */
 
@@ -30,7 +32,7 @@ function handlerCloseBtn() {
 
 /*                     UI FUNCTIONS                      */
 
-async function renderBoxes() {
+function renderBoxes() {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const play1: string = player1Input.value;
@@ -41,35 +43,41 @@ async function renderBoxes() {
     <p id="player1">${play1}</p>
     vs
     <p id="player2">${play2}</p>
-  </div>`;
+    </div>`;
     player1Input.value = "";
     player2Input.value = "";
-
-    const data = {
-      player1: play1,
-      player2: play2
-    };
-
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      });
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const responseData = await response.json();
-      console.log(responseData);
-      console.log("sending");
-    } catch (error) {
-      console.error("Error sending POST request:", error);
-    }
+    // getPlayers(play1, play2);
+    handlerGetPlayersId();
   });
+}
+
+function handlerGetPlayersId() {
+  const gameAll: NodeListOf<HTMLDivElement> = document.querySelectorAll(".game");
+  console.log(gameAll);
+
+  gameAll.forEach((item) => {
+    item.addEventListener("click", () => {
+      // console.log(item.id);
+      const clickedPlayer1 = item.querySelector("#player1").textContent;
+      const clickedPlayer2 = item.querySelector("#player2").textContent;
+      console.log("Clicked Players:", clickedPlayer1, clickedPlayer2);
+
+      getPlayers(clickedPlayer1, clickedPlayer1, item.id);
+    });
+  });
+}
+
+async function getPlayers(player1: any, player2: any, id: string) {
+  try {
+    const response = await Create({ player1, player2 });
+
+    console.log(response);
+    const getId = response.id;
+    console.log(getId);
+    console.log(response.nextPlayer);
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 /*                    LOGICAL FUNCTIONS                      */
@@ -78,6 +86,7 @@ function init() {
   handlerCreateBtn();
   handlerCloseBtn();
   renderBoxes();
+  // handlerGetPlayersId();
 }
 
 init();

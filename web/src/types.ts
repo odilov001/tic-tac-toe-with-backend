@@ -16,6 +16,10 @@ export namespace IEntity {
   }
 }
 export namespace IForm {
-  export interface Create extends Pick<IEntity.Game.Main, "player1"> {}
+  export interface Create extends Pick<IEntity.Game.Main, "player1" | "player2"> {}
   export interface Update extends Pick<IEntity.Game.Mini, "id"> {}
+  export interface Players {
+    player1: string;
+    player2: string;
+  }
 }
