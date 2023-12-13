@@ -1,6 +1,6 @@
 /*                     DOM VARIABLES                       */
 
-import { Create } from "./services/tic-tac-toe";
+import { Create, Single } from "./services/tic-tac-toe";
 import "./assets/bundle.css";
 import { IEntity } from "types";
 // import { Players } from './types';
@@ -62,6 +62,7 @@ function renderBoxes() {
     player2Input.value = "";
 
     getPlayers(play1, play2);
+    
   });
 }
 async function renderCells(data: any) {
@@ -81,7 +82,13 @@ async function renderCells(data: any) {
     gameDiv.appendChild(vsText);
     gameDiv.appendChild(player2Paragraph);
     player.appendChild(gameDiv);
-    gameDiv.addEventListener("click", () => {
+    gameDiv.addEventListener("click", async () => {
+      try {
+        const response = await Single(data.id);
+        console.log(response);
+      } catch (err) {
+        console.log(err);
+      }
       console.log(data[i].id);
       container.classList.add("hidden");
       cells.classList.replace("hidden", "grid");
