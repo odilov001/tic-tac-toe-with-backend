@@ -62,7 +62,7 @@ function renderBoxes() {
     player2Input.value = "";
 
     getPlayers(play1, play2);
-    
+    window.location.reload();
   });
 }
 async function renderCells(data: any) {
@@ -122,6 +122,7 @@ function renderGameCells() {
 async function getPlayers<T extends string>(player1: T, player2: T) {
   try {
     const response = await Create({ player1, player2 });
+
     console.log(response);
   } catch (err) {
     console.log(err);
